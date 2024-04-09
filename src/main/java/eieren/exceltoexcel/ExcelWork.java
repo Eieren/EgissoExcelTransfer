@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Iterator;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
@@ -174,13 +173,13 @@ public class ExcelWork {
 
             int countOriginRows = countOriginData(firstFile);
             int countSecondRows = countSecontData(secondFile);
-            
-            System.out.println("В файле с данными строк: "+countOriginRows);
-            System.out.println("В шаблоне строк: "+countSecondRows);
-            
+
+            System.out.println("В файле с данными строк: " + countOriginRows);
+            System.out.println("В шаблоне строк: " + countSecondRows);
+
             int getDataRow = 1;
 
-            for (int i = countSecondRows; i <= countSecondRows + countOriginRows-1; i++) {
+            for (int i = countSecondRows; i <= countSecondRows + countOriginRows - 1; i++) {
                 Row targetRow = secondSheet.createRow(i);
                 for (int j = getDataRow; j <= getDataRow; j++) {
                     Row sourceRow = firstSheet.getRow(j);

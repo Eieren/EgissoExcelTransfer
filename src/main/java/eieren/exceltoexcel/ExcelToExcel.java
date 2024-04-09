@@ -17,11 +17,8 @@ public class ExcelToExcel {
             }
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                MainScreen.main(args);
-            }
+        SwingUtilities.invokeLater(() -> {
+            MainScreen.main(args);
         });
     }
 }

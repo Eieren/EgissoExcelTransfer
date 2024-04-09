@@ -11,7 +11,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private JFileChooser fileChooser;
     private final FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xlsx");
-    private ExcelWork ew;
+    private String selectedFilePath, lastSelectedFilePath;
 
     public MainScreen() {
         initComponents();
@@ -319,25 +319,41 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void choosefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosefileActionPerformed
         fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        lastSelectedFilePath = System.getProperty("lastSelectedFilePath");
+        if (lastSelectedFilePath != null) {
+            fileChooser.setCurrentDirectory(new File(lastSelectedFilePath));
+        } else {
+            String directoryPath = System.getProperty("user.home");
+            fileChooser.setCurrentDirectory(new File(directoryPath));
+        }
         fileChooser.setFileFilter(filter);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             ExcelWork.validateOriginExcelFile(console, selectedFile);
             originfilepath.setText(selectedFile.getAbsolutePath());
+            selectedFilePath = selectedFile.getAbsolutePath();
+            System.setProperty("lastSelectedFilePath", selectedFilePath);
         }
     }//GEN-LAST:event_choosefileActionPerformed
 
     private void choosefile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosefile1ActionPerformed
         fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        lastSelectedFilePath = System.getProperty("lastSelectedFilePath");
+        if (lastSelectedFilePath != null) {
+            fileChooser.setCurrentDirectory(new File(lastSelectedFilePath));
+        } else {
+            String directoryPath = System.getProperty("user.home");
+            fileChooser.setCurrentDirectory(new File(directoryPath));
+        }
         fileChooser.setFileFilter(filter);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             ExcelWork.validatePatternExcelFile(console, selectedFile);
             originfilepath1.setText(selectedFile.getAbsolutePath());
+            selectedFilePath = selectedFile.getAbsolutePath();
+            System.setProperty("lastSelectedFilePath", selectedFilePath);
         }
     }//GEN-LAST:event_choosefile1ActionPerformed
 
@@ -374,9 +390,6 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_startMergeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new MainScreen().setVisible(true);
